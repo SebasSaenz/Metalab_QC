@@ -26,6 +26,7 @@ st.markdown("#### Twitter: @SaenzJohanS")
 uploaded_file = st.file_uploader("Choose a file", type=['txt'])
 if uploaded_file is not None:
     df = pd.read_table(uploaded_file)
+    df = df[df['Raw file'] != 'Total']
     st.write(df.head(10))
 
     # make a summary table
