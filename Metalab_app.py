@@ -16,7 +16,6 @@ def get_binary_file_downloader_html(bin_file, file_label='File'):
 st.set_page_config(layout="wide")
 
 # Set side bar
-st.sidebar.title("Summary of Metalab output v.01")
 uploaded_file = st.sidebar.file_uploader("Choose a file", type=['txt'])
 type_figure = st.sidebar.selectbox('Select type of figure', ["Individual samples", "Summary"])
 st.sidebar.markdown("#### Author: **Johan Sebastián Sáenz**")
@@ -25,7 +24,9 @@ st.sidebar.markdown("#### Twitter: @SaenzJohanS")
 
 
 # Read file with pandas and filter last row
+st.title("MetaLab Quality control output v.01")
 if uploaded_file is not None:
+    st.write("\n 10 first rows of your summary file")
     df = pd.read_table(uploaded_file)
     df = df[df['Raw file'] != 'Total']
     st.write(df.head(10))
@@ -76,6 +77,7 @@ if uploaded_file is not None:
         ax1.bar("Raw file", barplot_variable, data=df)
         ax1.set_xlabel("Samples")
         ax1.set_ylabel(barplot_variable)
+        plt.xticks(rotation=90)
         plt.savefig('barplot.png')
         col1.pyplot(fig)
         col1.markdown(get_binary_file_downloader_html('barplot.png', 'Picture'), unsafe_allow_html=True)
@@ -88,6 +90,7 @@ if uploaded_file is not None:
         ax1.scatter("Raw file", Scatter_variable, data=df)
         ax1.set_xlabel("Samples")
         ax1.set_ylabel(Scatter_variable)
+        plt.xticks(rotation=90)
         plt.savefig('Scatter.png')
         col2.pyplot(fig)
         col2.markdown(get_binary_file_downloader_html('Scatter.png', 'Picture'), unsafe_allow_html=True)
