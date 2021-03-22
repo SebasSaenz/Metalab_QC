@@ -83,13 +83,13 @@ if uploaded_file is not None:
         col1.markdown(get_binary_file_downloader_html('barplot.png', 'Picture'), unsafe_allow_html=True)
 
         col2.markdown("## Scatter plot")
-        Scatter_variable = col2.selectbox('Select a variable for histogram',
+        scatter_variable = col2.selectbox('Select a variable for histogram',
                                         options=['MS/MS Identified', 'MS/MS Identified [%]',
                                                  'Peptide Sequences Identified'])
         hist_fig = fig, ax1 = plt.subplots()
-        ax1.scatter("Raw file", Scatter_variable, data=df)
+        ax1.scatter("Raw file", scatter_variable, data=df)
         ax1.set_xlabel("Samples")
-        ax1.set_ylabel(Scatter_variable)
+        ax1.set_ylabel(scatter_variable)
         plt.xticks(rotation=90)
         plt.savefig('Scatter.png')
         col2.pyplot(fig)
